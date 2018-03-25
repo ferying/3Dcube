@@ -1,0 +1,237 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+    min-width: 600px;
+    min-height: 600px;
+}
+header h1{
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.wrapper{
+	width: 300px;
+	height: 300px;
+	margin: 100px auto 0;
+}
+/*立方体盒子*/
+.box{
+	width: 186px;
+	height: 186px;
+    transform-style: preserve-3d; /*开启3D视图，这样才能看到3D的效果*/
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    /*perspective-origin: -200px -200px;*/  /*透视的角度*/
+    /*perspective: 200px;*/  /*透视的距离*/
+	transform-origin: 93px 93px -93px; /*动画旋转中心点，分别为 X、Y、Z轴上的位置*/
+    -webkit-transform-origin: 93px 93px -93px; 
+    -moz-transform-origin: 93px 93px -93px; 
+    -ms-transform-origin: 93px 93px -93px; 
+    -o-transform-origin: 93px 93px -93px; 
+    animation: cubeRotate 5s ease-in-out infinite;  /*设置动画，动画的名称，动画执行时间，动画过度类型，动画执行次数*/
+    -webkit-animation: cubeRotate 5s ease-in-out infinite;
+    -moz-animation: cubeRotate 5s ease-in-out infinite;
+    -ms-animation: cubeRotate 5s ease-in-out infinite;
+    -o-animation: cubeRotate 5s ease-in-out infinite;
+}
+
+/*鼠标移上去时的动画状态为暂停*/
+.box:hover{
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -ms-animation-play-state: paused;
+    animation-play-state: paused;
+    cursor: pointer;
+}
+
+/*立方体的6个面*/
+.box > div{
+	width: 186px;
+	height: 186px;
+	position: absolute;  /*这里不能少，否则立方体几个面的位置就不对了，为什么？*/
+	overflow: hidden;
+    opacity: 0.8;  /*透明度*/
+}
+/*六个面中的9个小正方形*/
+.box .side-1 div,
+.box .side-2 div,
+.box .side-3 div,
+.box .side-4 div,
+.box .side-5 div,
+.box .side-6 div {
+	width: 60px;
+	height: 60px;
+	float: left;
+	border: 1px solid #999;
+	border-radius: 10px;
+}
+.box .side-1 div{
+	background: #F9E606;
+}
+.box .side-2 div{
+	background: #F96B06;
+}
+.box .side-3 div{
+	background: #15F906;
+}
+.box .side-4 div{
+	background: #06EEF9;
+}
+.box .side-5 div{
+	background: #2006F9;
+}
+.box .side-6 div{
+	background: #F9066B;
+}
+
+/*通过转换X、Y、Z轴上的角度，实现魔方六个面的位置摆放*/
+/*前面*/
+.box .side-1 {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
+/*后面*/
+.box .side-2 {
+    -webkit-transform: translateZ(-186px);
+    -moz-transform: translateZ(-186px);
+    -ms-transform: translateZ(-186px);
+    -o-transform: translateZ(-186px);
+    transform: translateZ(-186px);
+}
+/*左面*/
+.box .side-3 {
+    -webkit-transform: rotateY(90deg) translateX(93px) translateZ(-93px);
+    -moz-transform: rotateY(90deg) translateX(93px) translateZ(-93px);
+    -ms-transform: rotateY(90deg) translateX(93px) translateZ(-93px);
+    -o-transform: rotateY(90deg) translateX(93px) translateZ(-93px);
+    transform: rotateY(90deg) translateX(93px) translateZ(-93px);
+}
+/*右面*/
+.box .side-4 {
+    -webkit-transform: rotateY(90deg) translateX(93px) translateZ(93px);
+    -moz-transform: rotateY(90deg) translateX(93px) translateZ(93px);
+    -ms-transform: rotateY(90deg) translateX(93px) translateZ(93px);
+    -o-transform: rotateY(90deg) translateX(93px) translateZ(93px);
+    transform: rotateY(90deg) translateX(93px) translateZ(93px);
+}
+/*上面*/
+.box .side-5 {
+    -webkit-transform: rotateX(90deg) translateY(-93px) translateZ(93px);
+    -moz-transform: rotateX(90deg) translateY(-93px) translateZ(93px);
+    -ms-transform: rotateX(90deg) translateY(-93px) translateZ(93px);
+    -o-transform: rotateX(90deg) translateY(-93px) translateZ(93px);
+    transform: rotateX(90deg) translateY(-93px) translateZ(93px);
+}
+/*下面*/
+.box .side-6 {
+    -webkit-transform: rotateX(90deg) translateY(-93px) translateZ(-93px);
+    -moz-transform: rotateX(90deg) translateY(-93px) translateZ(-93px);
+    -ms-transform: rotateX(90deg) translateY(-93px) translateZ(-93px);
+    -o-transform: rotateX(90deg) translateY(-93px) translateZ(-93px);
+    transform: rotateX(90deg) translateY(-93px) translateZ(-93px);
+}
+
+
+/*下面是动画的定义，设置不同时间动画的不同状态
+rotateX、rotateY、rotateZ 为设置在X、Y、Z轴上旋转的角度
+"-"为逆时针旋转
+*/
+@-webkit-keyframes cubeRotate {
+    from,to {}
+    16% {
+        -webkit-transform: rotateY(-90deg);
+    }
+    33% {
+        -webkit-transform: rotateY(-90deg) rotateZ(135deg); 
+    }
+    50% {
+        -webkit-transform: rotateY(225deg) rotateZ(135deg);
+    }
+    66% {
+        -webkit-transform: rotateY(135deg) rotateX(135deg);
+    }
+    83% {
+        -webkit-transform: rotateX(135deg);
+    }
+}
+@-moz-keyframes cubeRotate {
+    from,to {}
+    16% {
+        -moz-transform: rotateY(-90deg);
+    }
+    33% {
+        -moz-transform: rotateY(-90deg) rotateZ(135deg); 
+    }
+    50% {
+        -moz-transform: rotateY(225deg) rotateZ(135deg);
+    }
+    66% {
+        -moz-transform: rotateY(135deg) rotateX(135deg);
+    }
+    83% {
+        -moz-transform: rotateX(135deg);
+    }
+}
+@-ms-keyframes cubeRotate {
+    from,to {}
+    16% {
+        -ms-transform: rotateY(-90deg);
+    }
+    33% {
+        -ms-transform: rotateY(-90deg) rotateZ(135deg); 
+    }
+    50% {
+        -ms-transform: rotateY(225deg) rotateZ(135deg);
+    }
+    66% {
+        -ms-transform: rotateY(135deg) rotateX(135deg);
+    }
+    83% {
+        -ms-transform: rotateX(135deg);
+    }
+}
+@-o-keyframes cubeRotate {
+    from,to {}
+    16% {
+        -o-transform: rotateY(-90deg);
+    }
+    33% {
+        -o-transform: rotateY(-90deg) rotateZ(135deg); 
+    }
+    50% {
+        -o-transform: rotateY(225deg) rotateZ(135deg);
+    }
+    66% {
+        -o-transform: rotateY(135deg) rotateX(135deg);
+    }
+    83% {
+        -o-transform: rotateX(135deg);
+    }
+}
+@keyframes cubeRotate {
+    from,to {}
+    16% {
+        transform: rotateY(-90deg);
+    }
+    33% {
+        transform: rotateY(-90deg) rotateZ(135deg); 
+    }
+    50% {
+        transform: rotateY(225deg) rotateZ(135deg);
+    }
+    66% {
+        transform: rotateY(135deg) rotateX(135deg);
+    }
+    83% {
+        transform: rotateX(135deg);
+    }
+}
+
